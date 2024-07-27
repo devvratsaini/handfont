@@ -17,8 +17,8 @@ const MainPage = () => {
         padding: "0 20px",
       }}
     >
-      <h2>Handwriting Font Converter</h2>
-      <NavBar/>
+     
+      <NavBar />
       <TemplateDownload />
       <Footer />
     </div>

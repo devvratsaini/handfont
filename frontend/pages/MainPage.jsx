@@ -1,7 +1,7 @@
 // src/pages/MainPage.js
 import React, { useState } from "react";
-import TextInput from "../components/TextInput";
-import ConvertedText from "../components/ConvertedText";
+// import TextInput from "../components/TextInput";
+// import ConvertedText from "../components/ConvertedText";
 import Layout from "./components/Layout";
 
 const MainPage = () => {

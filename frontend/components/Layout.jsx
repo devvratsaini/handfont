@@ -1,7 +1,7 @@
 // src/components/Layout.js
 import React from "react";
-import Header from "./Header";
-import Footer from "../Footer";
+// import Header from "./Header";
+import Footer from "./Footer";
 
 // The Layout component serves as a wrapper that includes the header, main content, and footer.
 const Layout = ({ children }) => {

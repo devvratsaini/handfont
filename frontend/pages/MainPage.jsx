@@ -1,5 +1,6 @@
 // src/pages/MainPage.js
 import React from "react";
+import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import TemplateDownload from "../components/TemplateDownload";
 
@@ -17,6 +18,7 @@ const MainPage = () => {
       }}
     >
       <h2>Handwriting Font Converter</h2>
+      <NavBar/>
       <TemplateDownload />
       <Footer />
     </div>

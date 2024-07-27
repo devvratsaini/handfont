@@ -1,21 +1,26 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import MainPage from "../pages/MainPage";
+// src/App.jsx (or App.js, depending on your setup)
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import MainPage from "../pages/MainPage.jsx";
+import GridPage from "../components/GridPage.jsx";
 
-// import AboutPage from "../pages/AboutPage";
-// import ContactPage from "../pages/ContactPage";
-import "./App.css";
+function App() {
+  const [uploadedImage, setUploadedImage] = useState("");
 
-const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        {/* <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} /> */}
+        <Route
+          path="/"
+          element={<MainPage setUploadedImage={setUploadedImage} />}
+        />
+        <Route
+          path="/grid"
+          element={<GridPage uploadedImage={uploadedImage} />}
+        />
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;

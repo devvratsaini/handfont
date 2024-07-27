@@ -1,13 +1,13 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Button from '@mui/material/Button';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
 
 export default function DenseAppBar() {
   const [anchorEl1, setAnchorEl1] = React.useState(null);
@@ -29,15 +29,40 @@ export default function DenseAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{ backgroundColor: 'black', width: '100%', height:'80px',display:'flex',justifyContent:'center'}}>
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: "black",
+          width: "100%",
+          height: "80px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <Toolbar variant="dense">
-          <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit" component="div" sx={{ flexGrow: 1,fontSize:'25px' }}>
+          <Typography
+            variant="h6"
+            color="inherit"
+            component="div"
+            sx={{ flexGrow: 1, fontSize: "25px" }}
+          >
             Hand Font Project
           </Typography>
-          <Button sx={{fontSize:'20px'}} color="inherit"  onClick={handleMenu1Open}>Options</Button>
+          <Button
+            sx={{ fontSize: "20px" }}
+            color="inherit"
+            onClick={handleMenu1Open}
+          >
+            Options
+          </Button>
           <Menu
             anchorEl={anchorEl1}
             open={Boolean(anchorEl1)}
@@ -50,8 +75,7 @@ export default function DenseAppBar() {
             anchorEl={anchorEl2}
             open={Boolean(anchorEl2)}
             onClose={handleMenu2Close}
-          >
-          </Menu>
+          ></Menu>
         </Toolbar>
       </AppBar>
       {/* Add some content to push the main content below the AppBar */}

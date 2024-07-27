@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 // import TextInput from "../components/TextInput";
 // import ConvertedText from "../components/ConvertedText";
+// import Footer from "../components/Footer";
 import Layout from "../components/Layout";
 
 const MainPage = () => {
@@ -15,9 +16,10 @@ const MainPage = () => {
     <Layout>
       <div className="main-page">
         <h1>Handwriting Font Converter</h1>
-        <TextInput value={text} onChange={handleTextChange} />
+        {/* <TextInput value={text} onChange={handleTextChange} /> */}
         <h2>Converted Text:</h2>
-        <ConvertedText text={text} />
+        {/* <ConvertedText text={text} /> */}
+        {/* <Footer/> */}
       </div>
     </Layout>
   );

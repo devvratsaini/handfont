@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   return (
     <div className="layout">
       {/* Include the Header component */}
-      <Header />
+      {/* <Header /> */}
 
       {/* Main content area where child components will be rendered */}
       <main>{children}</main>

@@ -1,24 +1,23 @@
 /* src/components/Footer.css */
 .footer {
-    background-color: #282c34;
-    color: white;
-    padding: 10px 20px;
+    width: 100%;
+    background-color: #f1f1f1;
     text-align: center;
+    padding: 10px 0;
     position: fixed;
     bottom: 0;
-    width: 100%;
-    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.footer p {
-    margin: 5px 0;
+    left: 0;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .footer a {
-    color: #61dafb;
+    color: inherit;
+    /* Keep link color same as text */
     text-decoration: none;
+    /* Remove underline */
+    margin: 0 5px;
 }
 
-.footer a:hover {
-    text-decoration: underline;
+.footer p {
+    margin: 0;
 }

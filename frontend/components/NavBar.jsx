@@ -1,29 +1,87 @@
-import React from 'react';
-import './NavBar.css';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
 
-const NavBar = () => {
+export default function DenseAppBar() {
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
+  const [anchorEl2, setAnchorEl2] = React.useState(null);
+
+  const handleMenu1Open = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
+
+  const handleMenu1Close = () => {
+    setAnchorEl1(null);
+  };
+
+  const handleMenu2Open = (event) => {
+    setAnchorEl2(event.currentTarget);
+  };
+
+  const handleMenu2Close = () => {
+    setAnchorEl2(null);
+  };
+
   return (
-    <nav className="navbar">
-      <div className="navbar-left">
-        <a href="/" className="logo">
-        Handwriting Font Converter
-        </a>
-      </div>
-      <div className="navbar-center">
-        <ul className="nav-links">
-          <li>
-            <a href="/title"></a>
-          </li>
-          <li>
-            <a href="/about">About Us</a>
-          </li>
-        </ul>
-      </div>
-      <div className="navbar-right">
-       
-      </div>
-    </nav>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: "black",
+          width: "100%",
+          height: "80px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Toolbar variant="dense">
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant="h6"
+            color="inherit"
+            component="div"
+            sx={{ flexGrow: 1, fontSize: "25px" }}
+          >
+            Hand Font Project
+          </Typography>
+          <Button
+            sx={{ fontSize: "20px" }}
+            color="inherit"
+            onClick={handleMenu1Open}
+          >
+            Options
+          </Button>
+          <Menu
+            anchorEl={anchorEl1}
+            open={Boolean(anchorEl1)}
+            onClose={handleMenu1Close}
+          >
+            <MenuItem onClick={handleMenu1Close}>Option 1.1</MenuItem>
+            <MenuItem onClick={handleMenu1Close}>Option 1.2</MenuItem>
+          </Menu>
+          <Menu
+            anchorEl={anchorEl2}
+            open={Boolean(anchorEl2)}
+            onClose={handleMenu2Close}
+          ></Menu>
+        </Toolbar>
+      </AppBar>
+      {/* Add some content to push the main content below the AppBar */}
+      <Toolbar />
+    </Box>
   );
-};
-
-export default NavBar;
+}

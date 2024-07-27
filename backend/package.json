@@ -13,6 +13,7 @@
     "dependencies": {
         "@neplex/vectorizer": "^0.0.4",
         "express": "^4.19.2",
+        "sharp": "^0.33.4",
         "svg2ttf": "^6.0.3",
         "svgicons2svgfont": "^12.0.0"
     }

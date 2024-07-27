@@ -13,7 +13,9 @@ export default function DenseAppBar() {
   const [anchorEl1, setAnchorEl1] = React.useState(null);
   const [anchorEl2, setAnchorEl2] = React.useState(null);
 
-  
+  const handleMenu1Open = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
   
   const handleMenu1Close = () => {
     setAnchorEl1(null);

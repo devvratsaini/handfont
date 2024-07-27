@@ -15,7 +15,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Devratt Saini
+          Devvrat Saini
         </a>
         <a
           href="https://github.com/divyanshpanwar03"

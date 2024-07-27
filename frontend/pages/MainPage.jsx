@@ -1,27 +1,25 @@
 // src/pages/MainPage.js
-import React, { useState } from "react";
-// import TextInput from "../components/TextInput";
-// import ConvertedText from "../components/ConvertedText";
-// import Footer from "../components/Footer";
-import Layout from "../components/Layout";
+import React from "react";
+import Footer from "../components/Footer";
+import TemplateDownload from "../components/TemplateDownload";
 
 const MainPage = () => {
-  const [text, setText] = useState("");
-
-  const handleTextChange = (event) => {
-    setText(event.target.value);
-  };
-
   return (
-    <Layout>
-      <div className="main-page">
-        <h1>Handwriting Font Converter</h1>
-        {/* <TextInput value={text} onChange={handleTextChange} /> */}
-        <h2>Converted Text:</h2>
-        {/* <ConvertedText text={text} /> */}
-        {/* <Footer/> */}
-      </div>
-    </Layout>
+    <div
+      className="main-page"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        minHeight: "100vh",
+        padding: "0 20px",
+      }}
+    >
+      <h2>Handwriting Font Converter</h2>
+      <TemplateDownload />
+      <Footer />
+    </div>
   );
 };
 

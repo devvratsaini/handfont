@@ -4,7 +4,7 @@ const {
     Hierarchical,
     PathSimplifyMode,
 } = require("@neplex/vectorizer");
-const { readFile, writeFile } = require("node:fs/promises");
+const fs = require("fs");
 
 /**
  *
@@ -13,11 +13,11 @@ const { readFile, writeFile } = require("node:fs/promises");
  */
 module.exports = async function imageToSvg(imageBuffer) {
     const svgString = await vectorize(imageBuffer, {
-        colorMode: ColorMode.Color,
-        colorPrecision: 6,
+        colorMode: ColorMode.Binary,
+        colorPrecision: 2,
         filterSpeckle: 4,
-        spliceThreshold: 45,
-        cornerThreshold: 60,
+        spliceThreshold: 45,    // TODO: fine tuning during testing
+        cornerThreshold: 60,    // TODO: fine tuning during testing
         hierarchical: Hierarchical.Stacked,
         mode: PathSimplifyMode.Spline,
         layerDifference: 5,
@@ -25,7 +25,14 @@ module.exports = async function imageToSvg(imageBuffer) {
         maxIterations: 2,
         pathPrecision: 5,
     });
+    
+    // fs.writeFile("./vector.svg", svgString, (err) => {
+    //     if (err) {
+    //         console.error("Error writing SVG:", err);
+    //     } else {
+    //         console.log("SVG written successfully!");
+    //     }
+    // });
 
     return svgString;
-    // await writeFile("./vector.svg", svg);
 };

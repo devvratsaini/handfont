@@ -11,13 +11,17 @@ const SvgFontToTtfFont = require("../../controllers/SvgFontToTtfFont");
 const svgToSvgFont = require("../../controllers/svgToSvgFont");
 
 module.exports = async function fontDownload(req, res) {
-    const svgIconResponse = req.body;
-    SvgFontToTtfFont(await svgToSvgFont(svgIconResponse));
-    const fontPath = path.join(FONT_OUTPUT_DIR, FONT_NAME);
+    try {
+        const svgIconResponse = req.body;
+        SvgFontToTtfFont(await svgToSvgFont(svgIconResponse));
+        const fontPath = path.join(FONT_OUTPUT_DIR, `${FONT_NAME}.ttf`);
 
-    res.sendFile(fontPath, (err) => {
-        if (err) {
-            res.status(500).json({ error: "Failed to send the font file" });
-        }
-    });
+        res.sendFile(fontPath, (err) => {
+            if (err) {
+                res.status(500).json({ error: "Failed to send the font file" });
+            }
+        });
+    } catch (error) {
+        console.error(error);
+    }
 };

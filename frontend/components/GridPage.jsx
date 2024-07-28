@@ -1,95 +1,91 @@
-import React from "react";
+// src/components/GridPage.jsx
+import React, { useState } from "react";
 import { Box, Typography, Grid, Paper } from "@mui/material";
-const standardAlphabet = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z",
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  ".",
-  ",",
-  "!",
-  "?",
-  "@",
-  "#",
-  "$",
-  "%",
-  "&",
-  "*",
-];
+import sampleGeneratedFont from "../public/sampleFontStructure";
 
-const GridPage = ({ uploadedImage }) => {
+const GridPage = () => {
+  const [images, setImages] = useState(
+    sampleGeneratedFont.characters.reduce((acc, charObj) => {
+      acc[charObj.char] = `data:image/svg+xml;utf8,${encodeURIComponent(
+        charObj.svgString
+      )}`;
+      return acc;
+    }, {})
+  );
+
+  const handleImageUpload = (event, char) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64Image = reader.result;
+
+        // Send the new image to the server to process it into an SVG string
+        const response = await fetch("/api/update-svg", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ char, base64Image }),
+        });
+
+        if (response.ok) {
+          const { svgString } = await response.json();
+          setImages((prevImages) => ({
+            ...prevImages,
+            [char]: `data:image/svg+xml;utf8,${encodeURIComponent(svgString)}`,
+          }));
+        } else {
+          console.error("Failed to update SVG on the server.");
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <Box sx={{ padding: 2 }}>
       <Typography variant="h4" gutterBottom>
         Handwriting Comparison
       </Typography>
       <Grid container spacing={2}>
-        {standardAlphabet.map((char) => (
-          <Grid item xs={6} sm={2} md={1} key={char}>
-            <Paper elevation={3} sx={{ padding: 1, textAlign: "center" }}>
-              <Typography variant="h5">{char}</Typography>
+        {sampleGeneratedFont.characters.map((charObj) => (
+          <Grid item xs={6} sm={3} md={2} lg={1} key={charObj.char}>
+            <Paper
+              elevation={3}
+              sx={{
+                padding: 2,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                cursor: "pointer",
+              }}
+              onClick={() =>
+                document.getElementById(`file-input-${charObj.char}`).click()
+              }
+            >
+              <Typography variant="h5" gutterBottom>
+                {charObj.char}
+              </Typography>
               <img
-                src={uploadedImage}
-                alt={`Uploaded character for ${char}`}
-                style={{ maxWidth: "100%" }}
+                src={images[charObj.char]}
+                alt={`Character ${charObj.char}`}
+                style={{
+                  width: "auto",
+                  height: "auto",
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  margin: "10px 0",
+                }}
+              />
+              <input
+                type="file"
+                id={`file-input-${charObj.char}`}
+                style={{ display: "none" }}
+                accept="image/*"
+                onChange={(event) => handleImageUpload(event, charObj.char)}
               />
             </Paper>
           </Grid>

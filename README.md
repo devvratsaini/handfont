@@ -4,6 +4,9 @@
 
 The project aims to automate the creation of a personalized handwriting font using image processing techniques. Users upload scanned images of handwritten characters, which are then processed to generate a TrueType Font (.ttf) file. Key functionalities include image segmentation using grid-based splitting, vectorization of character images to SVG format, and compilation into a downloadable font file. The project leverages Node.js for backend processing, Multer for file handling, and custom scripts for image manipulation and font generation.
 
+## Demo
+[HandFont Demo Link](https://youtu.be/bPF9YTvGUec)
+
 ## Installation
 
 To install this project, follow these steps:
@@ -79,7 +82,6 @@ Follow these steps to create and download your custom handwriting font:
 
 6. **Download Your Font**
 - Once you are satisfied with all the letters, download your custom font.
-
 
 ## Contributing
 

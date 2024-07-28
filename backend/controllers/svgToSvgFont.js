@@ -10,6 +10,8 @@ module.exports = function svgToSvgFont() {
     const fontStream = new SVGIcons2SVGFont({
         fontName: FONT_NAME,
         normalize: true,
+        centerHorizontally: true,
+        // centerVertically: true
     });
 
     fontStream

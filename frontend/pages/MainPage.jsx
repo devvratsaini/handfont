@@ -21,6 +21,7 @@ const MainPage = ({ setFontIconResponse }) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor:"white"
       }}
     >
       <NavBar />

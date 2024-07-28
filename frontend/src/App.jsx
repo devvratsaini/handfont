@@ -16,7 +16,7 @@ function App() {
         />
         <Route
           path="/grid"
-          element={<GridPage fontIconResponse={fontIconResponse} setfontIconResponse={setFontIconResponse } />}
+          element={<GridPage fontIconResponse={fontIconResponse} setFontIconResponse={setFontIconResponse } />}
         />
       </Routes>
     </Router>

@@ -25,14 +25,6 @@ module.exports = async function imageToSvg(imageBuffer) {
         maxIterations: 2,
         pathPrecision: 5,
     });
-    
-    // fs.writeFile("./vector.svg", svgString, (err) => {
-    //     if (err) {
-    //         console.error("Error writing SVG:", err);
-    //     } else {
-    //         console.log("SVG written successfully!");
-    //     }
-    // });
 
     return svgString;
 };

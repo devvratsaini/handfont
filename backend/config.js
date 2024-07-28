@@ -6,6 +6,8 @@ const IMAGE_CHARACTER_DIR = path.join(__dirname, "/public/imageCharacters");
 const SVG_CHARACTER_DIR = path.join(__dirname, "/public/svgCharacters");
 const FONT_OUTPUT_DIR = path.join(__dirname, "/public/fontOutput");
 const FONT_NAME = "MyHandwritingFont";
+const CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+const GRID_SIZE = { rows: 4, cols: 13 };
 const PORT = 3000;
 
 // create directories if they don't exist
@@ -32,4 +34,6 @@ module.exports = {
     FONT_OUTPUT_DIR,
     FONT_NAME,
     PORT,
+    CHARACTERS,
+    GRID_SIZE,
 };

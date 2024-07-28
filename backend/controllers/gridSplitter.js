@@ -8,6 +8,7 @@ const characterCount = CHARACTERS.length;
 /**
  * Splits a grid image into individual character images
  * @param {Buffer | string} imageBuffer - The input image as a buffer or file path
+ * @param {boolean} writeToDisk - Whether to write the extracted images to disk
  */
 async function splitGrid(imageBuffer, writeToDisk = false) {
     try {

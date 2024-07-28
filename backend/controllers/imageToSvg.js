@@ -15,6 +15,12 @@ const { SVG_CHARACTER_DIR } = require("../config");
  * @returns {Promise<String>}
  */
 module.exports = async function imageToSvg(imageBuffer, char) {
+    
+    if (!Buffer.isBuffer(imageBuffer)) {
+        console.log(imageBuffer);
+        throw new Error("imageBuffer must be a Buffer");
+    }
+    
     const svgString = await vectorize(imageBuffer, {
         colorMode: ColorMode.Binary,
         colorPrecision: 2,

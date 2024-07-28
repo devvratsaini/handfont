@@ -21,11 +21,12 @@ const MainPage = ({ setFontIconResponse }) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor:"white"
       }}
     >
       <NavBar />
-      <div style={{ flexGrow: 1, marginBottom: "100px", marginLeft: "310px" }}>
-        <h1 style={{ marginLeft: "60px" }}> Handwriting to Font Converter</h1>
+      <div style={{ flexGrow: 1, marginBottom: "68px", marginLeft: "10px" }}>
+        <h1 style={{ marginLeft: "70px" ,color:"black"}}> Handwriting to Font Converter</h1>
         <TemplateDownload setFontIconResponse={setFontIconResponse}/>
         <Box sx={{ width: "100%", marginTop: 4 }}>
           <Stepper activeStep={activeStep} alternativeLabel>

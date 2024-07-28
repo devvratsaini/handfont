@@ -70,6 +70,7 @@ const TemplateDownload = ({ setFontIconResponse }) => {
         marginTop: 2,
         padding: isMobile ? 2 : 0,
         paddingBottom: isMobile ? 10 : 0,
+        backgroundColor:"white"
       }}
     >
       <Card
@@ -135,7 +136,7 @@ const TemplateDownload = ({ setFontIconResponse }) => {
           </Typography>
           <Box
             sx={{
-              backgroundColor: "white",
+              backgroundColor: "#ffffff",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",

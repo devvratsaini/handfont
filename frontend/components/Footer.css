@@ -1,12 +1,13 @@
 /* src/components/Footer.css */
 .footer {
     width: 100%;
-    background-color: #f1f1f1;
+    background-color: #bebebe;
     text-align: center;
     padding: 10px 0;
     position: fixed;
     bottom: 0;
     left: 0;
+    color: black;
     box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
 }
 

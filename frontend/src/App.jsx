@@ -5,18 +5,18 @@ import MainPage from "../pages/MainPage.jsx";
 import GridPage from "../components/GridPage.jsx";
 
 function App() {
-  const [uploadedImage, setUploadedImage] = useState("");
+  const [fontIconResponse, setFontIconResponse] = useState(null);
 
   return (
     <Router>
       <Routes>
         <Route
           path="/"
-          element={<MainPage setUploadedImage={setUploadedImage} />}
+          element={<MainPage setFontIconResponse={setFontIconResponse} />}
         />
         <Route
           path="/grid"
-          element={<GridPage uploadedImage={uploadedImage} />}
+          element={<GridPage fontIconResponse={fontIconResponse} setfontIconResponse={setFontIconResponse } />}
         />
       </Routes>
     </Router>

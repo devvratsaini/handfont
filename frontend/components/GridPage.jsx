@@ -1,9 +1,9 @@
 // src/components/GridPage.jsx
 import React, { useState } from "react";
 import { Box, Typography, Grid, Paper } from "@mui/material";
-import sampleGeneratedFont from "../public/sampleFontStructure";
 
-const GridPage = () => {
+const GridPage = ({ fontIconResponse, setFontIconResponse }) => {
+  const sampleGeneratedFont = fontIconResponse;
   const [images, setImages] = useState(
     sampleGeneratedFont.characters.reduce((acc, charObj) => {
       acc[charObj.char] = `data:image/svg+xml;utf8,${encodeURIComponent(

@@ -8,6 +8,7 @@ const characterCount = CHARACTERS.length;
 /**
  * Splits a grid image into individual character images
  * @param {Buffer | string} imageBuffer - The input image as a buffer or file path
+ * @param {boolean} writeToDisk - Whether to write the extracted images to disk
  */
 async function splitGrid(imageBuffer, writeToDisk = false) {
     try {
@@ -56,9 +57,11 @@ async function splitGrid(imageBuffer, writeToDisk = false) {
                 });
 
                 if (writeToDisk) {
+                    const smallOrCaps =
+                        char === char.toLowerCase() ? "small" : "caps";
                     const outputPath = path.join(
                         IMAGE_CHARACTER_DIR,
-                        `${char}.png`
+                        `${char} ${smallOrCaps}.png`
                     );
                     await image.toFile(outputPath);
                 }

@@ -2,3 +2,6 @@
 
 # dependencies
 /node_modules
+/public/imageCharacters
+/public/svgCharacters
+/public/fontOutput

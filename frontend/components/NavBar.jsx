@@ -34,7 +34,7 @@ export default function DenseAppBar() {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: "black",
+          backgroundColor:"#213540",
           width: "100%",
           height: "80px",
           display: "flex",

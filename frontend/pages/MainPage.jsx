@@ -48,15 +48,12 @@ const MainPage = ({ setUploadedImage }) => {
       style={{
         minHeight: "100vh",
         padding: "0 20px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent:"center",
-        alignItems:"center"
+        backgroundColor: "white"
       }}
     >
       <NavBar />
-      <div style={{ flexGrow: 1, marginBottom: "100px",marginLeft:"310px" }}>
-        <h1 style={{marginLeft:"60px"}}>  Handwriting to Font Converter</h1>
+      <div style={{ flexGrow: 1, marginBottom: "68px",marginLeft:"10px" }}>
+        <h1 style={{marginLeft:"370px",color:"black"}}>  Handwriting to Font Converter</h1>
         <TemplateDownload
           handleFileUpload={handleFileUpload}
           handleDownloadTemplate={handleDownloadTemplate}

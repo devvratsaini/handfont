@@ -75,6 +75,7 @@ const TemplateDownload = ({ handleFileUpload }) => {
         marginTop: 2,
         padding: isMobile ? 2 : 0,
         paddingBottom: isMobile ? 10 : 0,
+        backgroundColor:"white"
       }}
     >
       <Card sx={{ maxWidth: 400, width: isMobile ? "100%" : "auto", backgroundColor: "rgba(0,0,0,0.1)" }}>
@@ -122,7 +123,7 @@ const TemplateDownload = ({ handleFileUpload }) => {
           </Typography>
           <Box
             sx={{
-              backgroundColor: "white",
+              backgroundColor: "#ffffff",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",

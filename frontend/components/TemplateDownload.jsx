@@ -74,22 +74,22 @@ const TemplateDownload = ({ handleFileUpload }) => {
         gap: 2,
         marginTop: 2,
         padding: isMobile ? 2 : 0,
-        paddingBottom: isMobile ? 10 : 0, // Added padding at the bottom for mobile view
+        paddingBottom: isMobile ? 10 : 0,
       }}
     >
-      <Card sx={{ maxWidth: 400,width: isMobile ? '100%' : 'auto',backgroundColor:"rgba(0,0,0,0.1)" }}>
+      <Card sx={{ maxWidth: 400, width: isMobile ? "100%" : "auto", backgroundColor: "rgba(0,0,0,0.1)" }}>
         <CardMedia
           component="img"
           height="253px"
           image="./src/template.jpeg"
           alt="Template preview"
-          style={{ objectFit: "contain" , paddingTop:"20px",backgroundColor:"rgba(0,0,0,0)"}}
+          style={{ objectFit: "contain", paddingTop: "20px", backgroundColor: "rgba(0,0,0,0)" }}
         />
         <CardContent>
           <Typography variant="h5" component="div" gutterBottom>
             Download Handwriting Template
           </Typography>
-          <Typography variant="body2" color="text.secondary" >
+          <Typography variant="body2" color="text.secondary">
             Print this template and fill out all of the little squares, just like
             shown above. Don't use a ballpoint pen, use a marker. Stay in the gray
             boxes. Scan it at 300 dpi in grayscale, not color, using an actual
@@ -111,7 +111,7 @@ const TemplateDownload = ({ handleFileUpload }) => {
         </CardContent>
       </Card>
 
-      <Card sx={{ maxWidth: 400, width: isMobile ? '100%' : 'auto', marginTop: isMobile ? 2 : 0, marginLeft: isMobile ? 0 : '50px', backgroundColor:"rgba(0,0,0,0.1)" }}>
+      <Card sx={{ maxWidth: 400, width: isMobile ? "100%" : "auto", marginTop: isMobile ? 2 : 0, marginLeft: isMobile ? 0 : "50px", backgroundColor: "rgba(0,0,0,0.1)" }}>
         <CardContent>
           <Typography variant="h5" component="div" gutterBottom>
             Upload Completed Template
@@ -122,7 +122,7 @@ const TemplateDownload = ({ handleFileUpload }) => {
           </Typography>
           <Box
             sx={{
-              backgroundColor:"white",
+              backgroundColor: "white",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -131,7 +131,7 @@ const TemplateDownload = ({ handleFileUpload }) => {
               borderRadius: 4,
               marginTop: 2,
               position: "relative",
-              overflow: "hidden", // Ensure the preview doesn't overflow
+              overflow: "hidden",
             }}
           >
             <input
@@ -164,7 +164,7 @@ const TemplateDownload = ({ handleFileUpload }) => {
               </Typography>
             )}
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 2, position: 'relative' }}>
+          <Box sx={{ display: "flex", alignItems: "center", marginTop: 2, position: "relative" }}>
             <Button
               variant="contained"
               onClick={handleButtonClick}

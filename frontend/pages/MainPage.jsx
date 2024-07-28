@@ -50,12 +50,13 @@ const MainPage = ({ setUploadedImage }) => {
         padding: "0 20px",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
+        justifyContent:"center",
+        alignItems:"center"
       }}
     >
       <NavBar />
-      <div style={{ flexGrow: 1, marginBottom: "50px" }}>
-        <h1>Handwriting to Font Converter</h1>
+      <div style={{ flexGrow: 1, marginBottom: "100px",marginLeft:"310px" }}>
+        <h1 style={{marginLeft:"60px"}}>  Handwriting to Font Converter</h1>
         <TemplateDownload
           handleFileUpload={handleFileUpload}
           handleDownloadTemplate={handleDownloadTemplate}

@@ -1,45 +1,39 @@
 // src/components/GridPage.jsx
 import React, { useState } from "react";
 import { Box, Typography, Grid, Paper } from "@mui/material";
-import sampleGeneratedFont from "../public/sampleFontStructure";
+import { SERVER_URL } from "../src/config";
+function convertToSvgURI(svgString) {
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svgString)}`;
+}
 
-const GridPage = () => {
-  const [images, setImages] = useState(
-    sampleGeneratedFont.characters.reduce((acc, charObj) => {
-      acc[charObj.char] = `data:image/svg+xml;utf8,${encodeURIComponent(
-        charObj.svgString
-      )}`;
-      return acc;
-    }, {})
-  );
-
-  const handleImageUpload = (event, char) => {
+const GridPage = ({ fontIconResponse, setFontIconResponse }) => {
+  const handleImageUpload = async (event, char) => {
     const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = async () => {
-        const base64Image = reader.result;
+    if (!file) return;
 
-        // Send the new image to the server to process it into an SVG string
-        const response = await fetch("/api/update-svg", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ char, base64Image }),
-        });
+    // Upload the image to the server and get the SVG string
+    const formData = new FormData();
+    formData.append("file", file);
 
-        if (response.ok) {
-          const { svgString } = await response.json();
-          setImages((prevImages) => ({
-            ...prevImages,
-            [char]: `data:image/svg+xml;utf8,${encodeURIComponent(svgString)}`,
-          }));
-        } else {
-          console.error("Failed to update SVG on the server.");
-        }
-      };
-      reader.readAsDataURL(file);
+    try {
+      const response = await fetch(`${SERVER_URL}/characterImage`, {
+        method: "POST",
+        body: formData,
+      }).then((response) => response.json());
+
+      // Assuming the response contains the SVG string
+      const newSvgString = response.svgString;
+
+      setFontIconResponse({
+        ...fontIconResponse,
+        characters: fontIconResponse.characters.map((charObj) =>
+          charObj.char === char
+            ? { ...charObj, svgString: newSvgString }
+            : charObj
+        ),
+      });
+    } catch (error) {
+      console.error("Error uploading image:", error);
     }
   };
 
@@ -49,7 +43,7 @@ const GridPage = () => {
         Handwriting Comparison
       </Typography>
       <Grid container spacing={2}>
-        {sampleGeneratedFont.characters.map((charObj) => (
+        {fontIconResponse.characters.map((charObj) => (
           <Grid item xs={6} sm={3} md={2} lg={1} key={charObj.char}>
             <Paper
               elevation={3}
@@ -70,7 +64,7 @@ const GridPage = () => {
                 {charObj.char}
               </Typography>
               <img
-                src={images[charObj.char]}
+                src={convertToSvgURI(charObj.svgString)}
                 alt={`Character ${charObj.char}`}
                 style={{
                   width: "auto",

@@ -10,8 +10,9 @@ import {
   useTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { SERVER_URL } from "../src/config";
 
-const TemplateDownload = ({ handleFileUpload }) => {
+const TemplateDownload = ({ setFontIconResponse }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [filePreview, setFilePreview] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -19,32 +20,26 @@ const TemplateDownload = ({ handleFileUpload }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  // TemplateDownload.jsx
+
   const handleUpload = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-
     setIsUploading(true);
-
-    try {
-      const response = await fetch("/api/files/upload", {
-        method: "POST",
-        body: formData,
+    const response = await fetch(`${SERVER_URL}/filledTemplate`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setFontIconResponse(data);
+        navigate("/grid");
+      })
+      .catch((error) => {
+        console.error("An error occurred during file upload:", error);
+        setIsUploading(false);
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data.filePath) {
-          handleFileUpload(data.filePath);
-          navigate("/grid");
-        }
-      } else {
-        console.error("File upload failed.");
-      }
-    } catch (error) {
-      console.error("An error occurred during file upload:", error);
-    } finally {
-      setIsUploading(false);
-    }
   };
 
   const handleFileChange = (event) => {
@@ -78,23 +73,33 @@ const TemplateDownload = ({ handleFileUpload }) => {
         backgroundColor:"white"
       }}
     >
-      <Card sx={{ maxWidth: 400, width: isMobile ? "100%" : "auto", backgroundColor: "rgba(0,0,0,0.1)" }}>
+      <Card
+        sx={{
+          maxWidth: 400,
+          width: isMobile ? "100%" : "auto",
+          backgroundColor: "rgba(0,0,0,0.1)",
+        }}
+      >
         <CardMedia
           component="img"
           height="253px"
           image="./src/template.jpeg"
           alt="Template preview"
-          style={{ objectFit: "contain", paddingTop: "20px", backgroundColor: "rgba(0,0,0,0)" }}
+          style={{
+            objectFit: "contain",
+            paddingTop: "20px",
+            backgroundColor: "rgba(0,0,0,0)",
+          }}
         />
         <CardContent>
           <Typography variant="h5" component="div" gutterBottom>
             Download Handwriting Template
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Print this template and fill out all of the little squares, just like
-            shown above. Don't use a ballpoint pen, use a marker. Stay in the gray
-            boxes. Scan it at 300 dpi in grayscale, not color, using an actual
-            scanner.
+            Print this template and fill out all of the little squares, just
+            like shown above. Don't use a ballpoint pen, use a marker. Stay in
+            the gray boxes. Scan it at 300 dpi in grayscale, not color, using an
+            actual scanner.
           </Typography>
           <Button
             variant="contained"
@@ -112,7 +117,15 @@ const TemplateDownload = ({ handleFileUpload }) => {
         </CardContent>
       </Card>
 
-      <Card sx={{ maxWidth: 400, width: isMobile ? "100%" : "auto", marginTop: isMobile ? 2 : 0, marginLeft: isMobile ? 0 : "50px", backgroundColor: "rgba(0,0,0,0.1)" }}>
+      <Card
+        sx={{
+          maxWidth: 400,
+          width: isMobile ? "100%" : "auto",
+          marginTop: isMobile ? 2 : 0,
+          marginLeft: isMobile ? 0 : "50px",
+          backgroundColor: "rgba(0,0,0,0.1)",
+        }}
+      >
         <CardContent>
           <Typography variant="h5" component="div" gutterBottom>
             Upload Completed Template
@@ -153,7 +166,11 @@ const TemplateDownload = ({ handleFileUpload }) => {
                 component="img"
                 image={filePreview}
                 alt="File preview"
-                style={{ maxHeight: "100%", maxWidth: "100%", objectFit: "contain" }}
+                style={{
+                  maxHeight: "100%",
+                  maxWidth: "100%",
+                  objectFit: "contain",
+                }}
               />
             ) : (
               <Typography
@@ -165,7 +182,14 @@ const TemplateDownload = ({ handleFileUpload }) => {
               </Typography>
             )}
           </Box>
-          <Box sx={{ display: "flex", alignItems: "center", marginTop: 2, position: "relative" }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginTop: 2,
+              position: "relative",
+            }}
+          >
             <Button
               variant="contained"
               onClick={handleButtonClick}
@@ -179,6 +203,9 @@ const TemplateDownload = ({ handleFileUpload }) => {
             >
               Upload Template
             </Button>
+            {isUploading && (
+              <Typography sx={{ marginLeft: 2 }}>Uploading...</Typography>
+            )}
           </Box>
         </CardContent>
       </Card>

@@ -1,3 +1,4 @@
+// src/components/TemplateDownload.jsx
 import React, { useState } from "react";
 import {
   Card,
@@ -9,12 +10,19 @@ import {
   LinearProgress,
   useMediaQuery,
   useTheme,
+  Alert,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const TemplateDownload = ({ handleFileUpload }) => {
+const TemplateDownload = ({
+  handleFileUpload,
+  handleDownloadTemplate,
+  activeStep,
+  setActiveStep,
+}) => {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(null);
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -41,12 +49,19 @@ const TemplateDownload = ({ handleFileUpload }) => {
           const data = await response.json();
           if (data.filePath) {
             handleFileUpload(data.filePath);
+            setActiveStep(2); // Move to 'Create Font' step
             navigate("/grid");
+            setUploadSuccess(true);
+          } else {
+            setUploadSuccess(false);
+            console.error("File upload failed.");
           }
         } else {
+          setUploadSuccess(false);
           console.error("File upload failed.");
         }
       } catch (error) {
+        setUploadSuccess(false);
         console.error("An error occurred during file upload:", error);
       } finally {
         setIsUploading(false);
@@ -56,109 +71,107 @@ const TemplateDownload = ({ handleFileUpload }) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 2,
-        marginTop: 2,
-        padding: isMobile ? 2 : 0,
-        paddingBottom: isMobile ? 10 : 0, // Added padding at the bottom for mobile view
-      }}
-    >
-      <Card sx={{ maxWidth: 400, width: isMobile ? '100%' : 'auto' }}>
-        <CardMedia
-          component="img"
-          height="253px"
-          image="./src/template.jpeg"
-          alt="Template preview"
-          style={{ objectFit: "contain" }}
-        />
-        <CardContent>
-          <Typography variant="h5" component="div" gutterBottom>
-            Download Handwriting Template
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Print this template and fill out all of the little squares, just like
-            shown above. Don't use a ballpoint pen, use a marker. Stay in the gray
-            boxes. Scan it at 300 dpi in grayscale, not color, using an actual
-            scanner.
-          </Typography>
-          <Button
-            variant="contained"
-            href="./src/blank_template.pdf"
-            download
-            sx={{
-              marginTop: 2,
-              backgroundColor: "#213547",
-              color: "white",
-              "&:hover": { backgroundColor: "#3a5a6f" },
-            }}
-          >
-            Download Template
-          </Button>
-        </CardContent>
-      </Card>
-
-      <Card sx={{ maxWidth: 400, width: isMobile ? '100%' : 'auto', marginTop: isMobile ? 2 : 0, marginLeft: isMobile ? 0 : '50px' }}>
-        <CardContent>
-          <Typography variant="h5" component="div" gutterBottom>
-            Upload Completed Template
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Once you've filled out and scanned your handwriting template, upload
-            it here.
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: 273,
-              border: "2px dashed #aaa",
-              borderRadius: 4,
-              marginTop: 2,
-              position: "relative",
-            }}
-          >
-            <input
-              type="file"
-              accept=".png, .jpg, .jpeg, .pdf"
-              onChange={handleUpload}
-              style={{
-                position: "absolute",
-                opacity: 0,
-                cursor: "pointer",
-                height: "100%",
-                width: "100%",
-                zIndex: 1,
-              }}
-            />
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ zIndex: 0, pointerEvents: "none" }}
-            >
-              Drag & Drop or Click to Upload
+    <Box sx={{ width: "100%", padding: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 4,
+          marginBottom: 4,
+        }}
+      >
+        <Card sx={{ maxWidth: 400, width: "100%" }}>
+          <CardMedia
+            component="img"
+            height="253px"
+            image="./src/template.jpeg"
+            alt="Template preview"
+            style={{ objectFit: "contain" }}
+          />
+          <CardContent>
+            <Typography variant="h5" component="div" gutterBottom>
+              Download Handwriting Template
             </Typography>
-          </Box>
-          {isUploading && (
-            <Box sx={{ width: '100%', marginTop: 2 }}>
-              <LinearProgress variant="determinate" value={uploadProgress} />
+            <Typography variant="body2" color="text.secondary">
+              Print this template and fill out all of the little squares, just
+              like shown above. Don't use a ballpoint pen, use a marker. Stay in
+              the gray boxes. Scan it at 300 dpi in grayscale, not color, using
+              an actual scanner.
+            </Typography>
+            <Button
+              variant="contained"
+              href="./src/blank_template.pdf"
+              download
+              sx={{
+                marginTop: 2,
+                backgroundColor: "#213547",
+                color: "white",
+                "&:hover": { backgroundColor: "#3a5a6f" },
+              }}
+              onClick={handleDownloadTemplate}
+            >
+              Download Template
+            </Button>
+          </CardContent>
+        </Card>
+
+        <Card sx={{ maxWidth: 400, width: "100%" }}>
+          <CardContent>
+            <Typography variant="h5" component="div" gutterBottom>
+              Upload Completed Template
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Once you've filled out and scanned your handwriting template,
+              upload it here.
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: 273,
+                border: "2px dashed #aaa",
+                borderRadius: 4,
+                marginTop: 2,
+                position: "relative",
+              }}
+            >
+              <input
+                type="file"
+                accept=".png, .jpg, .jpeg, .pdf"
+                onChange={handleUpload}
+                style={{
+                  position: "absolute",
+                  opacity: 0,
+                  cursor: "pointer",
+                  height: "100%",
+                  width: "100%",
+                  zIndex: 1,
+                }}
+              />
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ zIndex: 0, pointerEvents: "none" }}
+              >
+                Drag & Drop or Click to Upload
+              </Typography>
             </Box>
-          )}
-          <Box sx={{ display: 'flex', alignItems: 'center', marginTop: 2, position: 'relative' }}>
+            {isUploading && (
+              <Box sx={{ width: "100%", marginTop: 2 }}>
+                <LinearProgress variant="determinate" value={uploadProgress} />
+              </Box>
+            )}
             <Button
               variant="contained"
               component="label"
               sx={{
+                marginTop: 2,
                 backgroundColor: "#213547",
                 color: "white",
                 "&:hover": { backgroundColor: "#3a5a6f" },
-                position: "relative",
-                overflow: "hidden",
               }}
             >
               Upload Template
@@ -177,14 +190,17 @@ const TemplateDownload = ({ handleFileUpload }) => {
                 }}
               />
             </Button>
-            {isUploading && (
-              <Box sx={{ width: '100%', marginLeft: 2 }}>
-                <LinearProgress variant="determinate" value={uploadProgress} />
-              </Box>
+            {uploadSuccess !== null && (
+              <Alert
+                severity={uploadSuccess ? "success" : "error"}
+                sx={{ width: "100%", marginTop: 2 }}
+              >
+                {uploadSuccess ? "Upload Successful" : "Upload Unsuccessful"}
+              </Alert>
             )}
-          </Box>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </Box>
     </Box>
   );
 };

@@ -56,9 +56,11 @@ async function splitGrid(imageBuffer, writeToDisk = false) {
                 });
 
                 if (writeToDisk) {
+                    const smallOrCaps =
+                        char === char.toLowerCase() ? "small" : "caps";
                     const outputPath = path.join(
                         IMAGE_CHARACTER_DIR,
-                        `${char}.png`
+                        `${char} ${smallOrCaps}.png`
                     );
                     await image.toFile(outputPath);
                 }

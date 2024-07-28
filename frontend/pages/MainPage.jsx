@@ -45,7 +45,7 @@ const MainPage = ({ setUploadedImage }) => {
       }}
     >
       <NavBar />
-      <h1>Handwriting Font Converter</h1>
+      <h1>Handwriting to Font Converter</h1>
       <TemplateDownload handleFileUpload={handleFileUpload} />
       <Footer />
     </div>

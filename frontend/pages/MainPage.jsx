@@ -39,10 +39,7 @@ const MainPage = ({ setUploadedImage }) => {
     <div
       className="main-page"
       style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-start",
+      
         minHeight: "100vh",
         padding: "0 20px",
       }}

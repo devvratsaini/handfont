@@ -54,25 +54,12 @@ export default function DenseAppBar() {
             variant="h6"
             color="inherit"
             component="div"
-            sx={{ flexGrow: 1, fontSize: "25px" }}
+            sx={{ flexGrow: 1, fontSize: "25px", marginLeft:"100px" }}
           >
             Hand Font Project
           </Typography>
-          <Button
-            sx={{ fontSize: "20px" }}
-            color="inherit"
-            onClick={handleMenu1Open}
-          >
-            Options
-          </Button>
-          <Menu
-            anchorEl={anchorEl1}
-            open={Boolean(anchorEl1)}
-            onClose={handleMenu1Close}
-          >
-            <MenuItem onClick={handleMenu1Close}>Option 1.1</MenuItem>
-            <MenuItem onClick={handleMenu1Close}>Option 1.2</MenuItem>
-          </Menu>
+          
+          
           <Menu
             anchorEl={anchorEl2}
             open={Boolean(anchorEl2)}

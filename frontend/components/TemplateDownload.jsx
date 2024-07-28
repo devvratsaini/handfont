@@ -22,9 +22,10 @@ const TemplateDownload = ({ handleFileUpload }) => (
     <Card style={{ maxWidth: 400 }}>
       <CardMedia
         component="img"
-        height="140"
+        height="200px"
         image="./src/template.jpeg"
         alt="Template preview"
+        style={{ objectFit: "contain" }}
       />
       <CardContent>
         <Typography variant="h5" component="div" gutterBottom>
@@ -52,7 +53,7 @@ const TemplateDownload = ({ handleFileUpload }) => (
       </CardContent>
     </Card>
 
-    <Card style={{ maxWidth: 400 }}>
+    <Card style={{ maxWidth: 400, marginLeft:"50px" }}>
       <CardContent>
         <Typography variant="h5" component="div" gutterBottom>
           Upload Completed Template
@@ -66,7 +67,7 @@ const TemplateDownload = ({ handleFileUpload }) => (
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: 200,
+            height: 273,
             border: "2px dashed #aaa",
             borderRadius: 4,
             marginTop: 2,
@@ -78,11 +79,11 @@ const TemplateDownload = ({ handleFileUpload }) => (
             accept=".png, .jpg, .jpeg, .pdf"
             onChange={handleFileUpload}
             style={{
-              position: "absolute",
+              position: "fixed",
               opacity: 0,
               cursor: "pointer",
-              height: "100%",
-              width: "100%",
+              height: "40%",
+              width: "25%",
             }}
           />
           <Typography variant="body2" color="text.secondary">

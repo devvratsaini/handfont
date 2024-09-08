@@ -8,6 +8,9 @@ const imageToSvg = require("../../controllers/imageToSvg");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+/**
+ * This function splits the svg image into a grid and converts them into an array of SVG strings and its associated character.
+ */
 module.exports = async function templateUpload(req, res) {
     upload.single("file")(req, res, async (err) => {
         if (err) {
